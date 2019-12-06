@@ -81,6 +81,10 @@ public class SuperlativeFilter extends BaseStep implements StepInterface {
     Object[] r = getRow(); // get row, set busy!
 
     if ( first ) {
+      if ( r == null ) {
+        setOutputDone();
+        return false;
+      }
       outputRowMeta = getInputRowMeta().clone();
       valueIndex = outputRowMeta.indexOfValue( meta.getValueFieldName() );
       if ( valueIndex < 0 && ( topFilter || bottomFilter ) ) {
